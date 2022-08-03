@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
-const UserCheme = new mongoose.Schema(
+
+const UserScheme = new mongoose.Schema(
   {
     name: { type: String },
-    fechaNac: { type: Date() },
+    fechaNac:  { type: Date, default: Date.now },
     email: { type: String, unique: true },
     passsword: { type: String },
     role: { type: ["Usuario", "Admin", "Bodeguero"], default: "Usuario" },
@@ -12,4 +13,5 @@ const UserCheme = new mongoose.Schema(
     versionKey: false
   }
 );
-module.exports = mongoose.model("users", UserCheme)
+
+//module.exports = mongoose.model("users", UserScheme);
