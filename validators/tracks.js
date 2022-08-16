@@ -16,4 +16,10 @@ const validaCreateItem = [
     return helpervalidatorResults (req, res, next);
   }
 ];
-module.exports = {validaCreateItem};
+const validaGetItem = [
+  check("id").exists().notEmpty(),
+  (req, res, next) => {
+    return helpervalidatorResults (req, res, next);
+  }
+];
+module.exports = {validaCreateItem, validaGetItem};

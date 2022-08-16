@@ -9,4 +9,4 @@ const StorageCheme = new mongoose.Schema(
     versionKey: false
   }
 );
-module.exports = mongoose.model("users", StorageCheme)
+module.exports = mongoose.model("storage", StorageCheme)
