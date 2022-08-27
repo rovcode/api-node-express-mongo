@@ -3,7 +3,7 @@ const mongooseDelete = require("mongoose-delete");
 const UserScheme = new mongoose.Schema(
   {
     name: { type: String },
-    fechaNac:  { type: Date, default: Date.now },
+    fechaNac:  { type: Date},
     email: { type: String, unique: true },
     passsword: { type: String },
     role: { type: ["Usuario", "Admin", "Bodeguero"], default: "Usuario" },
