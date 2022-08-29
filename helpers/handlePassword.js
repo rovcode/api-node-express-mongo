@@ -3,7 +3,8 @@ const encrypt = async (passPlain) => {
     const hash = await bcryptjs.hash(passPlain,10);
     return hash;
 };
-const compare = async(passPlain, hash) => {
- return await bcryptjs.compare(passPlain, hash);
+const compara = async (passPlain, hash) => {
+ const state= await bcryptjs.compare(passPlain, hash);
+ return "Este:"+state+" llega:"+hash+passPlain;
 };
-module.exports = { encrypt, compare };
+module.exports = { encrypt, compara };

@@ -5,7 +5,7 @@ const UserScheme = new mongoose.Schema(
     name: { type: String },
     fechaNac:  { type: Date},
     email: { type: String, unique: true },
-    passsword: { type: String },
+    password: { type: String},
     role: { type: ["Usuario", "Admin", "Bodeguero"], default: "Usuario" },
   },
   {

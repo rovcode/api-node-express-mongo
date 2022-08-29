@@ -1,13 +1,14 @@
 const express = require('express')
 const router = express.Router()
 const {validaCreateItem, validaGetItem} = require('../validators/tracks')
+const {authMiddleware} = require("../middleware/session")
 const {getItems, showdetailsItem, createItem, updateItem, deleteItem} = require('../controllers/tracks')
 const customHeader = require('../middleware/customHeader')
 /** @
  * 
  *Lista tracks
  * */
-router.get("/",getItems)
+router.get("/", authMiddleware, getItems)
 /**
  * Crear un registro en mongo DB 
  */

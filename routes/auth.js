@@ -1,18 +1,12 @@
 const express = require('express')
 const { matchedData } = require("express-validator");
 const router = express.Router()
-const {validaRegisterUser, validaLogin} = require('../validators/auth')
-const { encrypt, compare } = require('../helpers/handlePassword')
-const { usersModel} = require('../models')
+const {registerController,loginController} = require("../controllers/auth")
+const {validaRegisterUser, validaLogin} = require("../validators/auth")
 /**
  * Crear un registro en mongo DB 
  */
-router.post("/register", validaRegisterUser, async (req, res) => {
-  req = matchedData(req);
-  const passs = await encrypt(req.passsword)  
-  const body = {...req, passs}
-  const data = await usersModel.create(body)
-  res.send({ data});
-});
+router.post("/register", validaRegisterUser, registerController);
+router.post("/login", validaLogin, loginController);
 
 module.exports = router
