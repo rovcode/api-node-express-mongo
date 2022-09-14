@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const {validaCreateItem, validaGetItem} = require('../validators/tracks')
 const {authMiddleware} = require("../middleware/session")
+const checkRol = require("../middleware/rol")
 const {getItems, showdetailsItem, createItem, updateItem, deleteItem} = require('../controllers/tracks')
 const customHeader = require('../middleware/customHeader')
 /** @
@@ -12,7 +13,7 @@ router.get("/", authMiddleware, getItems)
 /**
  * Crear un registro en mongo DB 
  */
-router.post("/",validaCreateItem,createItem)
+router.post("/",authMiddleware, checkRol(["Usuario"]),validaCreateItem,createItem)
 /**
  * Detalle de un item
  */
