@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const dbConection = () => {
+const dbConectionNoSQL = () => {
   const DB_URI = process.env.DB_URI;
   mongoose.connect(
     DB_URI,
@@ -16,4 +16,4 @@ const dbConection = () => {
     }
   );
 };
-module.exports = dbConection;
+module.exports = dbConectionNoSQL;

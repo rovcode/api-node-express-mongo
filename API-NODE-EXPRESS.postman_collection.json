@@ -1,0 +1,329 @@
+{
+	"info": {
+		"_postman_id": "9a11c31e-fda7-4296-87a0-3eb53b6e4a7b",
+		"name": "API-NODE-EXPRESS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10310138"
+	},
+	"item": [
+		{
+			"name": "tracks",
+			"item": [
+				{
+					"name": "ListarItems",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzBhZjMzZTFiYjg4ZDQxMjJmODFlMGUiLCJyb2xlIjpbIlVzdWFyaW8iXSwiaWF0IjoxNjYxNzUwODY3LCJleHAiOjE2NjE3NTQ0Njd9.1HHUamtbwYtpraYI4Bm6k0yICMmhp8q2C5SyeCGJyh0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/tracks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"tracks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registrar Item",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"name\": \"Javier\",\r\n\"album\": \"Albun Música\",\r\n\"cover\": \"http://ronyvelasquez.com\",\r\n\"artist\": {\r\n    \"name\": \"Rony\",\r\n    \"nickname\": \"rovcode\",\r\n    \"nationality\": \"PE\"\r\n},\r\n\"duration\":{\r\n   \"start\":1,\r\n   \"end\":0\r\n },\r\n \"mediaId\":\"6302ffaf175952440e8ffedc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/tracks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"tracks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ObtenerDetalle",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/tracks/6302fffc175952440e8ffede",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"tracks",
+								"6302fffc175952440e8ffede"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EliminarItem",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/tracks/6302fffc175952440e8ffede",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"tracks",
+								"6302fffc175952440e8ffede"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActualizarItem",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"name\": \"Rony\",\r\n\"album\": \"Prueba\",\r\n\"cover\": \"http://tttt.com\",\r\n\"artist\": {\r\n    \"name\": \"Rony\",\r\n    \"nickname\": \"rovcode\",\r\n    \"nationality\": \"PE\"\r\n},\r\n\"duration\":{\r\n   \"start\":1,\r\n   \"end\":0\r\n },\r\n \"mediaId\":\"621e7499alf699063f5114bc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/tracks/62e9fb30032af32471c04154",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"tracks",
+								"62e9fb30032af32471c04154"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Storage",
+			"item": [
+				{
+					"name": "SubirArchivo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "miarchivo",
+									"type": "file",
+									"src": "/C:/Users/Personal/Pictures/Web-con-HTML5-CSS-JS-PHP/img/icon_384.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/storage",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"storage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ObtenerStorage",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/storage",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"storage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteStorage",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/storage/6302ffaf175952440e8ffedc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"storage",
+								"6302ffaf175952440e8ffedc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DetalleStorage",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/storage/6302ffaf175952440e8ffedc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"storage",
+								"6302ffaf175952440e8ffedc"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Rony Velásquez Córdovass\",\r\n    \"fechaNac\":\"1995-03-28\",\r\n    \"email\":\"rony@gmail.com\",\r\n    \"password\":\"HolaMundo123\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"ronys@gmail.com\",\r\n    \"password\":\"HolaMundo123\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
