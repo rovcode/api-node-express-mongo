@@ -14,4 +14,4 @@ const storage = sequelize.define("storage",{
    timestamps: true,
 }
 );
-module.exports = Storage;
+module.exports = storage;

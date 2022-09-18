@@ -1,5 +1,5 @@
 const { matchedData } = require("express-validator");
-const { encrypt, compara } = require("../helpers/handlePassword");
+const { encrypt, compare } = require("../helpers/handlePassword");
 const { createToken } = require("../helpers/handleJWT");
 const { handlerError } = require("../helpers/handleError");
 const { usersModel } = require("../models");
@@ -22,13 +22,17 @@ const registerController = async (req, res) => {
 const loginController = async (req, res) => {
   try {
     req = matchedData(req);
-    const user = await usersModel.findOne({email: req.email })
+    const user = await usersModel.findOne({email: req.email })   
     if (!user) {
       handlerError(res, "User not found", 404);
       return
     }
-    const hashPassword = user.get('password');    
-    const check = await compara(req.password,hashPassword);
+    console.log(user.email+"Password: " + user.password);
+    console.log(req.email+"Password: " + req.password);  
+    const hashPassword = user.get('password');
+   
+    const check = await compare(req.password,hashPassword);
+    console.log(check);
     if (!check) {
       handlerError(res, "Password incorrect", 401);
       return
@@ -36,12 +40,13 @@ const loginController = async (req, res) => {
     user.set('password', undefined, {strict:false})
     const data = {
       token: await createToken(user),
-      user: user,
+      user,
     };
     res.send({ data });
+    
   } catch (e) {
-    console.log(e);
     handlerError(res, "Error login user");
+    console.log(e);
   }
 };
 

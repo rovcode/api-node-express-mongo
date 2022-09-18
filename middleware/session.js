@@ -23,6 +23,7 @@ const authMiddleware = async (req, res, next) => {
     }
     const user = await usersModel.findOne(query);
     req.user = user;
+    console.log(user);
     next()
   } catch (error) {
     handlerError(res, "No se inicia sesión", 401);
