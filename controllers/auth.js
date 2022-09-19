@@ -3,6 +3,7 @@ const { encrypt, compare } = require("../helpers/handlePassword");
 const { createToken } = require("../helpers/handleJWT");
 const { handlerError } = require("../helpers/handleError");
 const { usersModel } = require("../models");
+const ENGINE_DB = process.env.ENGINE_DB;
 const registerController = async (req, res) => {
   try {
     req = matchedData(req);
@@ -19,10 +20,21 @@ const registerController = async (req, res) => {
     handlerError(res, "Error register user");
   }
 };
+async function asyncCall(engine) {
+  console.log(engine);
+  if(engine === 'sql'){
+    return user = await usersModel.findOne({where:{email:req.email}}) 
+  } 
+  if(engine === 'nosql'){
+    return user = await usersModel.findOne({email:req.email}) 
+  }
+   
+}
+
 const loginController = async (req, res) => {
   try {
-    req = matchedData(req);
-    const user = await usersModel.findOne({email: req.email })   
+    req = matchedData(req);     
+    asyncCall(ENGINE_DB);
     if (!user) {
       handlerError(res, "User not found", 404);
       return
