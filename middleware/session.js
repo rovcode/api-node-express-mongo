@@ -14,16 +14,11 @@ const authMiddleware = async (req, res, next) => {
     if (!dataToken) {
       handlerError(res, "No jwt", 401);
     }
-    if (!dataToken._id) {
-      handlerError(res, "Error en el idenficador de token", 401);
-      return;
-    }
     const query = {
       [getPropsKey.id]:dataToken[getPropsKey.id]
     }
     const user = await usersModel.findOne(query);
     req.user = user;
-    console.log(user);
     next()
   } catch (error) {
     handlerError(res, "No se inicia sesión", 401);

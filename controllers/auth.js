@@ -3,7 +3,11 @@ const { encrypt, compare } = require("../helpers/handlePassword");
 const { createToken } = require("../helpers/handleJWT");
 const { handlerError } = require("../helpers/handleError");
 const { usersModel } = require("../models");
-const ENGINE_DB = process.env.ENGINE_DB;
+/**
+ * Se establece metodo reggistro
+ * @param {*} req
+ * @param {*} res
+ */
 const registerController = async (req, res) => {
   try {
     req = matchedData(req);
@@ -20,42 +24,27 @@ const registerController = async (req, res) => {
     handlerError(res, "Error register user");
   }
 };
-async function asyncCall(engine) {
-  console.log(engine);
-  if(engine === 'sql'){
-    return user = await usersModel.findOne({where:{email:req.email}}) 
-  } 
-  if(engine === 'nosql'){
-    return user = await usersModel.findOne({email:req.email}) 
-  }
-   
-}
 
 const loginController = async (req, res) => {
   try {
-    req = matchedData(req);     
-    asyncCall(ENGINE_DB);
+    req = matchedData(req);
+    user = await usersModel.findOne({ where: { email: req.email } });
     if (!user) {
       handlerError(res, "User not found", 404);
-      return
+      return;
     }
-    console.log(user.email+"Password: " + user.password);
-    console.log(req.email+"Password: " + req.password);  
-    const hashPassword = user.get('password');
-   
-    const check = await compare(req.password,hashPassword);
-    console.log(check);
+    const hashPassword = user.get("password");
+    const check = await compare(req.password, hashPassword);
     if (!check) {
       handlerError(res, "Password incorrect", 401);
-      return
+      return;
     }
-    user.set('password', undefined, {strict:false})
+    user.set("password", undefined, { strict: false });
     const data = {
       token: await createToken(user),
       user,
     };
     res.send({ data });
-    
   } catch (e) {
     handlerError(res, "Error login user");
     console.log(e);

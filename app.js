@@ -5,6 +5,8 @@ const morganBody = require("morgan-body");
 const loggerStream = require("./helpers/handleLogger");
 const dbConectionNoSQL  = require("./config/mongo");
 const {dbConnectMySQL } = require("./config/mysql");
+const openApiConfiguration = require("./doc/swagger");
+const swaggerUI = require("swagger-ui-express");
 const app = express();
 const ENGINE_DB = process.env.ENGINE_DB;
 app.use(cors());
@@ -19,8 +21,13 @@ morganBody(app, {
   },
 });
 const port = process.env.PORT || 3000;
-
-//Llamamos a las rutas
+/**
+ * Definimos las rutas de la documentacion
+ */
+ app.use('/docs',swaggerUI.serve, swaggerUI.setup(openApiConfiguration) )
+/**
+ * LLamamos a las rutas
+ */
 app.use("/api", require("./routes"));
 app.listen(port, () => {
   console.log("*****SERVIDOR INICIADO EN*****");

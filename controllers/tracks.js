@@ -10,10 +10,13 @@ const { handlerError } = require("../helpers/handleError");
 const getItems = async (req, res) => {
   try {
     const user = req.user;
-    const data = await tracksModel.find({});
-    res.send({ data, user });
+    const data = await tracksModel.findAllData({});
+     console.log(data);
+     console.log(user);
+    res.send({ data, user })
   } catch (err) {
     handlerError(res, "Error en getItems");
+    console.log(err);
   }
 };
 
@@ -26,10 +29,11 @@ const showdetailsItem = async (req, res) => {
   try {
     req = matchedData(req);
     const { id } = req;
-    const data = await tracksModel.findById(id);
+    const data = await tracksModel.findOneData(id);
     res.send({ data });
   } catch (error) {
-    handleHttpError(res, "Error en get item");
+    handlerError(res, "Error en get item");
+    console.log(error);
   }
 };
 /**

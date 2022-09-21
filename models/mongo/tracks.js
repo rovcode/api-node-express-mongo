@@ -37,7 +37,7 @@ const TracksScheme = new mongoose.Schema(
       },
     },
     mediaId: {
-      type: String,
+      type: mongoose.Types.ObjectId,
     },
   },
   {
@@ -49,25 +49,56 @@ const TracksScheme = new mongoose.Schema(
 /**
  * Implementar metodo propio con relacion a storage
  */
-
 TracksScheme.statics.findAllData = function () {
-  const joinData = this.aggregate([
-    //TODO Tracks
+  const midata = this.aggregate([
     {
       $lookup: {
-        from: "storages", //TODO Tracks --> storages
-        localField: "mediaId", //TODO Tracks.mediaId
-        foreignField: "_id", //TODO Straoges._id
-        as: "audio", //TODO Alias!
+        from: 'storages', 
+        localField: 'mediaId', 
+        foreignField: '_id', 
+        as: "audio",
       },
+      
     },
     {
-      $unwind: "$audio",
-    },
+      $unwind: '$audio',
+    }
   ]);
-  return joinData;
+  return midata;
+};
+/**
+ * @param {id}, send the id of tracks for join to storages
+ * @returns  returns joinData from storages for the given id 
+ */
+TracksScheme.statics.findOneData = function (id) {
+  const midata = this.aggregate([
+    {
+      $lookup: {
+        from: 'storages', 
+        localField: 'mediaId', 
+        foreignField: '_id', 
+        as: "audio",
+      },
+      
+    },
+    {
+      $unwind: '$audio',
+    },
+    {
+       $match:{
+        _id:mongoose.Types.ObjectId(id)
+       }
+
+    }
+  ]);
+  return midata;
 };
 
+/**
+ * 
+ * @param {*} id 
+ * @returns get value from TracksScheme for the given id
+ */
 TracksScheme.statics.findOneData = function (id) {
   const joinData = this.aggregate([
     {
@@ -83,9 +114,6 @@ TracksScheme.statics.findOneData = function (id) {
         as: "audio", //TODO Alias!
       },
     },
-    {
-      $unwind: "$audio",
-    }, 
   ]);
   return joinData;
 };
