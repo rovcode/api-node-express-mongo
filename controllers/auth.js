@@ -19,6 +19,7 @@ const registerController = async (req, res) => {
       user: dataUser,
       token: await createToken(dataUser),
     };
+    res.status(201);
     res.send({ data });
   } catch (e) {
     handlerError(res, "Error register user");
