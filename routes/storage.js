@@ -78,7 +78,7 @@ router.get('/:id', validaGetItem, showdetailsItem);
  *           schema:
  *             type: object
  *             properties:
- *               myfile:
+ *               miarchivo:
  *                 type: string
  *                 format: binary
  *    responses:
