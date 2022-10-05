@@ -9,6 +9,7 @@ const openApiConfiguration = require("./doc/swagger");
 const swaggerUI = require("swagger-ui-express");
 const app = express();
 const ENGINE_DB = process.env.ENGINE_DB;
+const NODE_ENV = process.env.NODE_ENV || "development";
 app.use(cors());
 app.use(express.json());
 app.use(express.static("storage"));
@@ -29,10 +30,10 @@ const port = process.env.PORT || 3000;
  * LLamamos a las rutas
  */
 app.use("/api", require("./routes"));
-app.listen(port, () => {
-  console.log("*****SERVIDOR INICIADO EN*****");
-  console.log("http://localhost:" + port + "");
-});
+if(NODE_ENV !== "test") {
+  app.listen(port);
+}
+
 //dbConectionNoSQL()
 if (ENGINE_DB === 'nosql') {
   dbConectionNoSQL();
